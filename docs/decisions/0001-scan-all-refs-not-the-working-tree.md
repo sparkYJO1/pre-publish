@@ -125,8 +125,10 @@ is a feature — identical content is scanned once.
 
 ## Consequences
 
-- Cost is proportional to history, not to the working tree. A large repository
-  takes seconds to minutes. Acceptable: this runs once, before publication.
+- Cost is proportional to history, not to the working tree. Measured on a
+  laptop against a 740-commit repository — 4,870 objects, 1,073 text blobs,
+  6.8 MB scanned — the full five-channel run takes 2.2 s. Acceptable for
+  something that runs once, before publication.
 - Objects reachable only from the reflog are included by default. They are not
   transferred by `git push`, but they are in the `.git` directory being handed
   over if a repository is published by copying rather than pushing.
