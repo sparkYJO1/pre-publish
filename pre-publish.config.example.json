@@ -1,0 +1,50 @@
+{
+  "_comment": [
+    "Example only. Every name here is invented.",
+    "A real terms file lists the exact strings you are trying not to publish,",
+    "so it belongs OUTSIDE the repository being audited. pre-publish refuses a",
+    "--terms path inside the repo unless you pass --allow-terms-in-repo.",
+    "What can safely live in the repo is a file like this one: suppressions",
+    "and controls that reference terms by id, never by value."
+  ],
+
+  "terms": [
+    { "id": "org", "value": "Norhaven", "note": "organisation name" },
+    { "id": "org-ko", "value": "노르헤이븐", "note": "non-ASCII spelling; no word boundaries applied" },
+    {
+      "id": "product",
+      "value": "Zephyrline",
+      "channels": ["contents", "paths", "refs", "messages"],
+      "note": "not scanned in identities; nobody's name contains it"
+    },
+    { "id": "employer-mail", "value": "zephyrline-internal.example" },
+    { "id": "delta", "value": "Delta", "note": "also an ordinary word; see the suppression below" },
+    "AnotherClientName"
+  ],
+
+  "controls": [
+    {
+      "value": "a string you know for a fact is in this repository's file contents",
+      "channel": "contents",
+      "note": "checked with the same matcher a real term uses; zero matches means the run is untrusted"
+    }
+  ],
+
+  "suppress": [
+    {
+      "termId": "delta",
+      "channel": "contents",
+      "pathPrefix": "src/geometry/",
+      "reason": "delta as in difference; unrelated to the organisation name"
+    },
+    {
+      "termId": "aws-access-key-id",
+      "channel": "contents",
+      "pathPrefix": "tests/",
+      "reason": "AWS's own published example key id, planted in a test fixture; not a credential"
+    }
+  ],
+
+  "secrets": true,
+  "maxBlobBytes": 2097152
+}

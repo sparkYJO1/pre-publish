@@ -1,0 +1,23 @@
+{
+  "name": "pre-publish",
+  "version": "0.1.0",
+  "description": "Audit a private repository's entire git history before you open-source it.",
+  "type": "module",
+  "license": "MIT",
+  "bin": { "pre-publish": "dist/cli.js" },
+  "files": ["dist", "README.md"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "selfcheck": "npm run build && node dist/cli.js --repo . --terms pre-publish.selfcheck.json --allow-terms-in-repo"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

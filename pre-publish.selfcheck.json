@@ -1,0 +1,28 @@
+{
+  "_comment": [
+    "The config pre-publish uses on itself, in CI and via `npm run selfcheck`.",
+    "It carries no `terms`: a real terms list names the strings you are trying",
+    "not to publish and belongs outside the repository. What is safe to commit",
+    "is this -- suppressions that reference findings by id, and a control string",
+    "that is public by definition because it is already in the repository."
+  ],
+
+  "controls": [
+    {
+      "value": "pre-publish",
+      "channel": "contents",
+      "note": "present in package.json and the README; zero matches here means the scanner is not reading file contents"
+    }
+  ],
+
+  "suppress": [
+    {
+      "termId": "aws-access-key-id",
+      "channel": "contents",
+      "pathPrefix": "tests/",
+      "reason": "AWS publishes this key id in its own documentation as a non-functional example. It is planted in a test fixture so the secret check has something real to find. The literal is deliberately not repeated here: a suppression file that quotes the value it suppresses becomes the finding."
+    }
+  ],
+
+  "secrets": true
+}

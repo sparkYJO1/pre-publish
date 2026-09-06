@@ -1,0 +1,37 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # actions/checkout defaults to fetch-depth: 1, which is a shallow
+          # clone. pre-publish treats a shallow clone as a blocker and exits 2,
+          # for the reason in docs/decisions/0001: a scan of one commit is not
+          # a history check, however confidently it returns zero. This is the
+          # first failure of the incident this tool was built from, and it is
+          # the default setting of the most common CI action in the world.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      # Audit this repository with itself. The committed config carries no
+      # terms -- a real terms list names what you are trying not to publish and
+      # belongs outside the repo -- only suppressions referenced by id and one
+      # control string. --allow-terms-in-repo is correct here precisely because
+      # the file holds nothing sensitive.
+      - run: node dist/cli.js --repo . --terms pre-publish.selfcheck.json --allow-terms-in-repo
