@@ -2,17 +2,57 @@
   "name": "pre-publish",
   "version": "0.1.0",
   "description": "Audit a private repository's entire git history before you open-source it.",
+  "keywords": [
+    "open-source",
+    "audit",
+    "git-history",
+    "secret-scanning",
+    "leak",
+    "pre-publish",
+    "compliance",
+    "cli",
+    "security"
+  ],
+  "author": "John Yoon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sparkYJO1/pre-publish.git"
+  },
+  "homepage": "https://github.com/sparkYJO1/pre-publish#readme",
+  "bugs": {
+    "url": "https://github.com/sparkYJO1/pre-publish/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "type": "module",
   "license": "MIT",
-  "bin": { "pre-publish": "dist/cli.js" },
-  "files": ["dist", "README.md"],
-  "engines": { "node": ">=20" },
+  "bin": {
+    "pre-publish": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "selfcheck": "npm run build && node dist/cli.js --repo . --terms pre-publish.selfcheck.json --allow-terms-in-repo"
+    "selfcheck": "npm run build && node dist/cli.js --repo . --terms pre-publish.selfcheck.json --allow-terms-in-repo",
+    "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {},
   "devDependencies": {
