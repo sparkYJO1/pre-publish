@@ -23,7 +23,7 @@ describe("shallow clones", () => {
    */
   it("refuses to audit a shallow clone, because its history is not there", () => {
     const source = buildLeakyRepo();
-    const workspace = mkdtempSync(join(tmpdir(), "pre-publish-shallow-"));
+    const workspace = mkdtempSync(join(tmpdir(), "gitsieve-shallow-"));
     try {
       execFileSync("git", [
         "clone",
@@ -59,7 +59,7 @@ describe("shallow clones", () => {
 
   it("downgrades the blocker to a warning under --allow-shallow", () => {
     const source = buildLeakyRepo();
-    const workspace = mkdtempSync(join(tmpdir(), "pre-publish-shallow-"));
+    const workspace = mkdtempSync(join(tmpdir(), "gitsieve-shallow-"));
     try {
       execFileSync("git", [
         "clone",

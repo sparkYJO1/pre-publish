@@ -28,7 +28,7 @@ export const TERMS = {
 export class Fixture {
   readonly dir: string;
 
-  constructor(prefix = "pre-publish-test-") {
+  constructor(prefix = "gitsieve-test-") {
     this.dir = mkdtempSync(join(tmpdir(), prefix));
   }
 

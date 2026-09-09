@@ -12,9 +12,9 @@ import { GitError, RealGitRepo } from "./git.js";
 import { exitCodeFor, formatJson, formatReport, EXIT_USAGE } from "./report.js";
 import { scan } from "./scan.js";
 
-const USAGE = `pre-publish -- audit a repository's entire history before open-sourcing it
+const USAGE = `gitsieve -- audit a repository's entire history before open-sourcing it
 
-  pre-publish [options]
+  gitsieve [options]
 
 Options
   --repo <path>            repository to audit (default: .)

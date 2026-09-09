@@ -2,7 +2,7 @@
   "_comment": [
     "Example only. Every name here is invented.",
     "A real terms file lists the exact strings you are trying not to publish,",
-    "so it belongs OUTSIDE the repository being audited. pre-publish refuses a",
+    "so it belongs OUTSIDE the repository being audited. gitsieve refuses a",
     "--terms path inside the repo unless you pass --allow-terms-in-repo.",
     "What can safely live in the repo is a file like this one: suppressions",
     "and controls that reference terms by id, never by value."

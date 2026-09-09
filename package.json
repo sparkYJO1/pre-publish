@@ -1,5 +1,5 @@
 {
-  "name": "pre-publish",
+  "name": "gitsieve",
   "version": "0.1.0",
   "description": "Audit a private repository's entire git history before you open-source it.",
   "keywords": [
@@ -16,11 +16,11 @@
   "author": "John Yoon",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sparkYJO1/pre-publish.git"
+    "url": "git+https://github.com/sparkYJO1/gitsieve.git"
   },
-  "homepage": "https://github.com/sparkYJO1/pre-publish#readme",
+  "homepage": "https://github.com/sparkYJO1/gitsieve#readme",
   "bugs": {
-    "url": "https://github.com/sparkYJO1/pre-publish/issues"
+    "url": "https://github.com/sparkYJO1/gitsieve/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -36,7 +36,7 @@
   "type": "module",
   "license": "MIT",
   "bin": {
-    "pre-publish": "dist/cli.js"
+    "gitsieve": "dist/cli.js"
   },
   "files": [
     "dist",
@@ -51,7 +51,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "selfcheck": "npm run build && node dist/cli.js --repo . --terms pre-publish.selfcheck.json --allow-terms-in-repo",
+    "selfcheck": "npm run build && node dist/cli.js --repo . --terms gitsieve.selfcheck.json --allow-terms-in-repo",
     "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {},

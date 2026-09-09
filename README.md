@@ -1,4 +1,4 @@
-# pre-publish
+# gitsieve
 
 Audit a private repository's **entire git history** before you open-source it,
 and get a go/no-go.
@@ -12,7 +12,7 @@ The feature that matters most is the one that sounds like overhead: **it proves
 it can find something before it tells you it found nothing.**
 
 ```
-$ pre-publish --repo . --terms ~/private/terms.json
+$ gitsieve --repo . --terms ~/private/terms.json
 
 SCANNER VERIFICATION
   ok   contents    "createReadStream"           1 match(es), derived
@@ -107,7 +107,7 @@ be off in the run that matters. Rationale and evidence:
   `refs/heads/*`. Branches outside that refspec were never fetched.
 - **Deny-all `.gitignore`** → warning. A `*` + `!allowed` whitelist is a normal
   thing to write and an auditing hazard: every tool that honours ignore files
-  will skip most of the repository and report it clean. `pre-publish` itself
+  will skip most of the repository and report it clean. `gitsieve` itself
   reads objects from git, not files from disk, so it is unaffected — but the
   next person to run ripgrep in that directory will be.
 
@@ -147,7 +147,7 @@ too. They are not substitutes for each other.
 
 **gitleaks and trufflehog find secrets.** Keys, tokens, credentials — things
 with a recognisable shape, often verified live against the issuing service.
-Hundreds of rules, years of tuning. `pre-publish` ships nine patterns and no
+Hundreds of rules, years of tuning. `gitsieve` ships nine patterns and no
 verification, and will not catch what they catch.
 
 **They do not find organisation-owned vocabulary,** because it has no shape. A
@@ -221,7 +221,7 @@ There is no clever fix, so the tool does three unclever things instead:
   the repository you are about to publish is the whole problem in miniature.
   `--allow-terms-in-repo` exists for terms that are genuinely not sensitive.
 
-So a repository can carry `pre-publish.config.json` with its suppressions and
+So a repository can carry `gitsieve.config.json` with its suppressions and
 its `id`s, and the file that maps those ids to real words stays in your home
 directory, your password manager, or your CI secrets.
 
@@ -246,8 +246,8 @@ log must not become the leak.
 ## Install and use
 
 ```bash
-git clone https://github.com/sparkYJO1/pre-publish
-cd pre-publish
+git clone https://github.com/sparkYJO1/gitsieve
+cd gitsieve
 npm install && npm run build
 node dist/cli.js --repo /path/to/repo --terms ~/private/terms.json
 ```
@@ -276,7 +276,7 @@ Node 20+. No runtime dependencies — it shells out to `git` and nothing else.
 ```
 
 A bare string is shorthand for `{ "id": s, "value": s }`. See
-[`pre-publish.config.example.json`](pre-publish.config.example.json).
+[`gitsieve.config.example.json`](gitsieve.config.example.json).
 
 ### Options
 
